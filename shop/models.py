@@ -27,3 +27,14 @@ class Product(models.Model):  #Inherits the properties of Model class in models
 
     def __str__(self):
         return self.product_name
+
+
+class Contact(models.Model):  #Inherits the properties of Model class in models
+    message_id = models.AutoField(primary_key = True)
+    name = models.CharField(max_length=50)
+    email= models.CharField(max_length=50, default='')
+    phoneNumber = models.IntegerField(default=0)
+    description = models.CharField(max_length=300, default='')
+    
+    def __str__(self):
+        return self.name

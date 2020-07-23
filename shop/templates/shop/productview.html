@@ -1,0 +1,57 @@
+<!-- This is template inheritence...It inherits the base code frpm base.html -->
+
+{% extends 'shop/basic.html' %}
+
+{% block css %}
+<style>
+    #product-image{
+        width: 240px;
+        height: 210px;
+    }
+</style>
+{% endblock %}
+
+{% block title%} {{product.product_name}}{% endblock %}
+{% block body %}
+    <div class="container my-4">
+        <div class="jumbotron">
+                <div class="row">
+              <div class="col-md-4">
+                <div class="row"><img id="product-image" src="/media/{{product.image}}" alt="{{product.product_name}}Image Here"></div>  
+              </div>
+              <div class="col-md-8">
+                <h5>{{product.product_name}}</h5>
+                <p>{{product.description}}</p> 
+                <p> <button id="{{product.product_name}}" class="btn btn-primary cart my-1">Add To Cart</button>
+                </p> 
+              </div>
+            </div>
+           </div>
+    </div>
+{% endblock %}
+
+{% block js%}
+<script>
+  // console.log('working')
+  cart = {};
+  if (localStorage.getItem('cart') !== null) {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    document.getElementById('productsInCart').innerHTML = Object.keys(cart).length;
+  }
+  $('.cart').click(function () { //It is a jquery command to get the document item by class name 'cart'
+    // console.log('clicked');
+    let clicked_item = this.id.toString();
+    // console.log(clicked_item);
+    if (cart[clicked_item] != undefined) {
+      cart[clicked_item] = cart[clicked_item] + 1;
+    }
+    else {
+      cart[clicked_item] = 1;
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(cart);
+    document.getElementById('productsInCart').innerHTML = Object.keys(cart).length;
+  });
+  $('#popper-cart').popover() //popper button for add to cart 
+</script>
+{% endblock %}

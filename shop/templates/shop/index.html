@@ -1,5 +1,6 @@
 {% extends 'shop/basic.html' %}
 {% block css %}
+<style>
 .col-md-3
 {
 display: inline-block;
@@ -12,8 +13,8 @@ background-color: grey;
 
 .col-md-3 img{
 
-width: 200px;
-height: 180px;
+width: 240px;
+height: 200px;
 }
 
 body .carousel-indicator li{
@@ -35,7 +36,7 @@ top: auto;
 bottom: auto;
 }
 body .no-padding{
-padding-left: 0,
+padding-left: 0;
 padding-right: 0;
 }
 .carousel-control-prev, .carousel-control-next{
@@ -44,6 +45,7 @@ padding-right: 0;
 .card, .cart-text{
 padding:5px;
 }
+</style>
 {% endblock %}
 
 {% block body %}
@@ -80,6 +82,7 @@ padding:5px;
                 <h5 class="card-title">{{i.product_name}}</h5>
                 <p class="card-text">{{i.description}}</p>
                 <button id="{{i.product_name}}" class="btn btn-primary cart">Add To Cart</button>
+                <a href="/shop/productview/{{i.id}}"><button id="{{i.id}}" class="btn btn-primary my-1">Quick View</button></a>
               </div>
             </div>
           </div>
@@ -92,8 +95,6 @@ padding:5px;
 
           {% endfor %}
         </div>
-
-
 
       </div>
     </div>
@@ -131,5 +132,6 @@ padding:5px;
     console.log(cart);
     document.getElementById('productsInCart').innerHTML = Object.keys(cart).length;
   });
+  $('#popper-cart').popover() //popper button for add to cart 
 </script>
 {% endblock %}
